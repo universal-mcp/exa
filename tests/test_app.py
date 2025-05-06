@@ -2,29 +2,29 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from universal_mcp_exa.app import Exa
+from universal_mcp_exa.app import ExaApp
 
 @pytest.fixture
 def app_instance():
-    """Provides a Exa instance for tests."""
+    """Provides a ExaApp instance for tests."""
     mock_integration = MagicMock()
     mock_integration.get_credentials.return_value = {"access_token": "dummy_access_token"}
 
-    return Exa(integration=mock_integration)
+    return ExaApp(integration=mock_integration)
 
-def test_universal_mcp_exa_app_initialization(app_instance):
+def test_universal_mcp_ExaApp_app_initialization(app_instance):
     """
-    Test that the Exa instance is initialized correctly with a name.
+    Test that the ExaApp instance is initialized correctly with a name.
     """
     assert hasattr(app_instance, 'name'), "Application instance should have a 'name' attribute."
     assert isinstance(app_instance.name, str), "Application name should be a string."
     assert app_instance.name.strip() != "", "Application name should not be empty."
-    assert app_instance.name == "exa", "Exa instance has unexpected name."
+    assert app_instance.name == "exa", "ExaApp instance has unexpected name."
 
 
-def test_universal_mcp_exa_tool_docstrings_format(app_instance):
+def test_universal_mcp_ExaApp_tool_docstrings_format(app_instance):
     """
-    Test that each tool method in Exa has a well-formatted docstring,
+    Test that each tool method in ExaApp has a well-formatted docstring,
     including summary, Args, Returns, and Tags sections.
     Checks for Raises section optionally.
     """
@@ -53,9 +53,9 @@ def test_universal_mcp_exa_tool_docstrings_format(app_instance):
         assert "tags:" in docstring_lower, f"Docstring for '{tool_name}' is missing 'Tags:' section."
 
 
-def test_universal_mcp_exa_tools_are_callable(app_instance):
+def test_universal_mcp_ExaApp_tools_are_callable(app_instance):
     """
-    Test that each tool method returned by list_tools in Exa is callable.
+    Test that each tool method returned by list_tools in ExaApp is callable.
     """
     tools = app_instance.list_tools()
     assert isinstance(tools, list), "list_tools() should return a list."

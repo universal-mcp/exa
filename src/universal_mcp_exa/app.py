@@ -2,9 +2,9 @@ from typing import Any
 from universal_mcp.applications import APIApplication
 from universal_mcp.integrations import Integration
 
-class Exa(APIApplication):
+class ExaApp(APIApplication):
     def __init__(self, integration: Integration = None, **kwargs) -> None:
-        super().__init__(name='exaapp', integration=integration, **kwargs)
+        super().__init__(name='exa', integration=integration, **kwargs)
         self.base_url = "https://api.exa.ai"
 
     def search(self, query, useAutoprompt=True, type="auto", category=None, numResults=10, includeDomains=None, excludeDomains=None, startCrawlDate=None, endCrawlDate=None, startPublishedDate=None, endPublishedDate=None, includeText=None, excludeText=None, contents=None) -> dict[str, Any]:
