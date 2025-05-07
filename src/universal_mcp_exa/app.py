@@ -7,7 +7,7 @@ class ExaApp(APIApplication):
         super().__init__(name='exa', integration=integration, **kwargs)
         self.base_url = "https://api.exa.ai"
 
-    def search(self, query, useAutoprompt=True, type="auto", category=None, numResults=10, includeDomains=None, excludeDomains=None, startCrawlDate=None, endCrawlDate=None, startPublishedDate=None, endPublishedDate=None, includeText=None, excludeText=None, contents=None) -> dict[str, Any]:
+    def search(self, query, useAutoprompt=None, type=None, category=None, numResults=None, includeDomains=None, excludeDomains=None, startCrawlDate=None, endCrawlDate=None, startPublishedDate=None, endPublishedDate=None, includeText=None, excludeText=None, contents=None) -> dict[str, Any]:
         """
         Searches for data using the specified criteria and returns a list of results.
 
@@ -29,6 +29,9 @@ class ExaApp(APIApplication):
 
         Returns:
             dict[str, Any]: OK
+        
+        Tags:
+            important
         """
         request_body = {
             'query': query,
@@ -53,7 +56,7 @@ class ExaApp(APIApplication):
         response.raise_for_status()
         return response.json()
 
-    def find_similar(self, url, numResults=10, includeDomains=None, excludeDomains=None, startCrawlDate=None, endCrawlDate=None, startPublishedDate=None, endPublishedDate=None, includeText=None, excludeText=None, contents=None) -> dict[str, Any]:
+    def find_similar(self, url, numResults=None, includeDomains=None, excludeDomains=None, startCrawlDate=None, endCrawlDate=None, startPublishedDate=None, endPublishedDate=None, includeText=None, excludeText=None, contents=None) -> dict[str, Any]:
         """
         Finds and returns similar items using the API at "/findSimilar" via the POST method.
 
@@ -72,6 +75,9 @@ class ExaApp(APIApplication):
 
         Returns:
             dict[str, Any]: OK
+            
+        Tags:
+            important
         """
         request_body = {
             'url': url,
@@ -93,7 +99,7 @@ class ExaApp(APIApplication):
         response.raise_for_status()
         return response.json()
 
-    def get_contents(self, urls, ids=None, text=None, highlights=None, summary=None, livecrawl=None, livecrawlTimeout=10000, subpages=0, subpageTarget=None, extras=None) -> dict[str, Any]:
+    def get_contents(self, urls, ids=None, text=None, highlights=None, summary=None, livecrawl=None, livecrawlTimeout=None, subpages=None, subpageTarget=None, extras=None) -> dict[str, Any]:
         """
         Creates new content entries via a POST request to the "/contents" endpoint.
 
@@ -116,6 +122,9 @@ class ExaApp(APIApplication):
 
         Returns:
             dict[str, Any]: OK
+            
+        Tags:
+            important
         """
         request_body = {
             'urls': urls,
@@ -136,7 +145,7 @@ class ExaApp(APIApplication):
         response.raise_for_status()
         return response.json()
 
-    def answer(self, query, stream=False, text=False, model="exa") -> dict[str, Any]:
+    def answer(self, query, stream=None, text=None, model=None) -> dict[str, Any]:
         """
         Provides an answer to a query using the API endpoint at "/answer" via the POST method.
 
@@ -148,6 +157,9 @@ class ExaApp(APIApplication):
 
         Returns:
             dict[str, Any]: OK
+            
+        Tags:
+            important
         """
         request_body = {
             'query': query,
